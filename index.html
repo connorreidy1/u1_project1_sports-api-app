@@ -5,20 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script defer src="js/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Red+Hat+Display:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>Scottish Premiership</title>
 </head>
 <body>
-    <header>
-        <img id="league-logo">
-        <h2 id="league-name"></h2>
-        <input id="inputBar" type="text" placeholder="enter city here" />
-        <button id="submitButton"> Click Here </button>
-    </header>
-    <section id="team-aberdeen">
-        <img id="team-logo" alt="Team Logo">
-        <h2 id="team-name"></h2>
-    </section>
+    <div id="container">
+        <header>
+            <div id="header-container">
+                    <img id="league-logo">
+                    <h1 id="league-name">Scottish Premiership</h1>
+            </div>
+        </header>
+        <div id="links-container">
+            <button value="Standings" id="standings">Standings</button>
+            <button value="Top Scorers" id="top-scorers">Top Scorers</button>
+            <button value="Schedule" id="schedule">Schedule</button>
+
+        </div>
+    </div>
+    <div id="strip1"></div>
+    <div id="strip2"></div>
+    <section id="teams-container"></section>
     
 </body>
 </html>
