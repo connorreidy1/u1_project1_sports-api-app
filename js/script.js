@@ -37,36 +37,52 @@ document.addEventListener('DOMContentLoaded', async () => {
         teamSection.appendChild(teamLogo)
         teamSection.appendChild(teamName)
 
-        //click event listenre for each team container
-        teamSection.addEventListener('click', async () => {
+        teamsContainer.appendChild(teamSection)
+
+          //click event listener for get data for each team
+          teamSection.addEventListener('click', async () => {
             const detailedResponse = await axios.get(`${baseURL}teams/${teamID}?api_token=${apiToken}&include=players;country;venue;statistics;latest;`)
             const detailedTeamData = detailedResponse.data.data
+
+            // window.location.href = `team.html?teamID=${teamID}`
             
-            console.log(detailedTeamData)
-        })
+            console.log('Detailed Team Information:', detailedTeamData)
 
-        teamsContainer.appendChild(teamSection)
-    }
-})
+            //getting data for each player
+            const players = detailedTeamData.players
+            
+            if (players && Array.isArray(players)) {
+                const getPlayerInfo = async (playerID) => {
+                    const playerResponse = await axios.get(`${baseURL}players/${playerID}?api_token=${apiToken}`)
+                    const playerData = playerResponse.data.data
+
+                    const playerName = playerData.display_name
+                    const playerImage = playerData.image_path
+                    // const jerseyNumber = playerData.statistics[0].jersey_number
+                    // const positionName = playerData.position.name
+    
+                    console.log(`Player ID: ${playerID}, Player Name: ${playerName}, Image: ${playerImage}`)
+                } 
+                for (const player of players) {
+                    await getPlayerInfo(player.player_id)
+                }
+            } 
+        
+        })   
+      
+        }
+    })
 
 
 
-//onclick Get Team information
-// document.addEventListener('click', async () => {
-//     const baseURL = 'https://api.sportmonks.com/v3/football/'
-//     const apiToken = 'OPYT85RqlYZMUrcBDn4xvkSfa8bXHN2ITuEQpH1GLJQNw6D52mkB4joVSvBy'
-//     const individualTeamsContainer = document.querySelector('#individual-team-container')
+    // const playerIDs = detailedResponse.data.data.map(player => player.player_id)
 
-//     const individulTeamIDs = ['273', '53', '284', '314', '66', '180', '258', '309', '62', '246', '734', '496']
-
-   
-
-//     for (const individualTeamID of individualTeamIDs) {
-//         const responseTeam = await axios.get(`${baseURL}teams/${teamID}?api_token=${apiToken}&include=players;venue;coaches;statistics;latest;`)
-//         const individualTeamData = responseTeam.data.data
-
-//         console.log()
-//     }
-
-
-// })
+    // const getPlayerInfo = async (playerID) => {
+    //     const playerResponse = await axios.get(`${baseURL}players/${playerID}?api_token=${apiToken}`)
+    //     const playerData = playerResponse.data.data
+        
+    //     console.log(`Player ID: ${playerID}, Player Name: ${playerData.fullname}`)
+    // }
+    // for (const playerID of playerIDs) {
+    //     await getPlayerInfo(playerID)
+    // }

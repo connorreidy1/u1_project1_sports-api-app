@@ -12,3 +12,6 @@ Resources
 
 Button CSS Help
 https://stackoverflow.com/questions/57547226/how-to-remove-background-from-button
+
+Displaying sections
+https://stackoverflow.com/questions/69315502/creating-a-script-for-a-button-to-close-other-sections-when-opening-its-own-sect
