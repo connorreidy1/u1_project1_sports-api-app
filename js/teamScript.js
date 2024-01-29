@@ -39,19 +39,42 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     console.log('Detailed Team Information:', detailedTeamData)
 
-
+//getting data for each player
     const players = detailedTeamData.players
+    const playersContainer = document.querySelector('#individual-team-container')
             
             if (players && Array.isArray(players)) {
                 const getPlayerInfo = async (playerID) => {
                     const playerResponse = await axios.get(`${baseURL}players/${playerID}?api_token=${apiToken}&include=position;detailedPosition;statistics;latest;teams;`)
                     const playerData = playerResponse.data.data
 
-                    const playerName = playerData.display_name
-                    const playerImage = playerData.image_path
-                    const jerseyNumber = playerData.statistics[0].jersey_number
-                    const positionName = playerData.position.name
+                    const playerSection = document.createElement('section')
+                    playerSection.classList.add('player-container')
+
+                    const playerImage = document.createElement('img')
+                    playerImage.classList.add('player-image')
+                    playerImage.alt = 'Player Image'
+                    playerImage.src = playerData.image_path
+
+                    const playerName = document.createElement('h3')
+                    playerName.classList.add('player-name')
+                    playerName.innerText = playerData.display_name
+
+                    const jerseyNumber = document.createElement('h3')
+                    jerseyNumber.classList.add('jersey-number')
+                    jerseyNumber.innerText = playerData.statistics[0].jersey_number
+                
+                    const positionName = document.createElement('h3')
+                    positionName.classList.add('position-name')
+                    positionName.innerText = playerData.position.name
     
+                    playerSection.appendChild(playerImage)
+                    playerSection.appendChild(playerName)
+                    playerSection.appendChild(jerseyNumber)
+                    playerSection.appendChild(positionName)
+
+                    playersContainer.appendChild(playerSection)
+                    
 
                     console.log(playerData)
                     console.log(`Player ID: ${playerID}, Player Name: ${playerName}, Image: ${playerImage}, Jersey Number: ${jerseyNumber} Position: ${positionName}`)

@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             window.location.href = `team.html?teamID=${teamID}`
             
-            console.log('Detailed Team Information:', detailedTeamData)
+            // console.log('Detailed Team Information:', detailedTeamData)
 
             //getting data for each player
             // const players = detailedTeamData.players
