@@ -7,8 +7,8 @@
     <script defer src="js/teamScript.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Red+Hat+Display:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/teamstyle.css">
     <title>Team Details</title>
 </head>
 <body>
@@ -25,13 +25,22 @@
             <button value="Schedule" id="schedule">Schedule</button>
         </div>
     </div>
-    <div id="team-details-container"></div>
-        <div>
-            <h2 id="team-name"></h2>
-            <h4 id="team-record"></h4>
-            <h4 id="team-stadium"></h4>
-            <h4 id="team-location"></h4>
+    <div id="team-details-container">
+        <div id="team-header-container">
+            <div id="logo-name-containter">
+                <img id="team-logo">
+                <h2 id="team-name"></h2>
+            </div>
+            <div id="stadium-location-container">
+                <!-- <h4 id="team-record"></h4> -->
+                <h4 id="team-stadium"></h4>
+                <h4 id="team-location"></h4>
+            </div>
+            <div id="roster">
+                <h3>Roster</h3>
+            </div>
         </div>
         <section id="individual-team-container"></section>
+    </div>
      
 </html>

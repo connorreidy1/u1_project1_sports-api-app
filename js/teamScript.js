@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search)
     const teamID= urlParams.get('teamID')
 
+    const teamLogo = document.querySelector('#team-logo')
     const teamName = document.querySelector('#team-name')
     const teamStadium = document.querySelector('#team-stadium')
     const teamLocation = document.querySelector('#team-location')
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const detailedTeamData = detailedResponse.data.data
 
     //Team information
+    teamLogo.src = detailedTeamData.image_path
     const name = detailedTeamData.name
     teamName.innerHTML = name
     const stadium = detailedTeamData.venue.name
@@ -62,11 +64,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     const jerseyNumber = document.createElement('h3')
                     jerseyNumber.classList.add('jersey-number')
-                    jerseyNumber.innerText = playerData.statistics[0].jersey_number
+                    jerseyNumber.innerText = `#${playerData.statistics[0].jersey_number}`
                 
                     const positionName = document.createElement('h3')
                     positionName.classList.add('position-name')
-                    positionName.innerText = playerData.position.name
+                    const positionNameParts = playerData.position.name.split('')
+                    const firstName = positionNameParts[0]
+                    positionName.innerText = firstName
     
                     playerSection.appendChild(playerImage)
                     playerSection.appendChild(playerName)
