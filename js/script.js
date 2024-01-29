@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const response = await axios.get(`${baseURL}teams/${teamID}?api_token=${apiToken}`);
         const teamData = response.data.data
 
-        console.log(`Team Name: ${teamData.name}, Team Logo: ${teamData.image_path}`)
+        // console.log(`Team Name: ${teamData.name}, Team Logo: ${teamData.image_path}`)
 
         const teamSection = document.createElement('section')
         teamSection.classList.add('team-container')
@@ -44,29 +44,31 @@ document.addEventListener('DOMContentLoaded', async () => {
             const detailedResponse = await axios.get(`${baseURL}teams/${teamID}?api_token=${apiToken}&include=players;country;venue;statistics;latest;`)
             const detailedTeamData = detailedResponse.data.data
 
-            // window.location.href = `team.html?teamID=${teamID}`
+            window.location.href = `team.html?teamID=${teamID}`
             
             console.log('Detailed Team Information:', detailedTeamData)
 
             //getting data for each player
-            const players = detailedTeamData.players
+            // const players = detailedTeamData.players
             
-            if (players && Array.isArray(players)) {
-                const getPlayerInfo = async (playerID) => {
-                    const playerResponse = await axios.get(`${baseURL}players/${playerID}?api_token=${apiToken}`)
-                    const playerData = playerResponse.data.data
+            // if (players && Array.isArray(players)) {
+            //     const getPlayerInfo = async (playerID) => {
+            //         const playerResponse = await axios.get(`${baseURL}players/${playerID}?api_token=${apiToken}&include=position;detailedPosition;statistics;latest;teams;`)
+            //         const playerData = playerResponse.data.data
 
-                    const playerName = playerData.display_name
-                    const playerImage = playerData.image_path
-                    // const jerseyNumber = playerData.statistics[0].jersey_number
-                    // const positionName = playerData.position.name
+            //         const playerName = playerData.display_name
+            //         const playerImage = playerData.image_path
+            //         const jerseyNumber = playerData.statistics[0].jersey_number
+            //         const positionName = playerData.position.name
     
-                    console.log(`Player ID: ${playerID}, Player Name: ${playerName}, Image: ${playerImage}`)
-                } 
-                for (const player of players) {
-                    await getPlayerInfo(player.player_id)
-                }
-            } 
+
+            //         console.log(playerData)
+            //         console.log(`Player ID: ${playerID}, Player Name: ${playerName}, Image: ${playerImage}, Jersey Number: ${jerseyNumber} Position: ${positionName}`)
+            //     } 
+            //     for (const player of players) {
+            //         await getPlayerInfo(player.player_id)
+            //     }
+            // } 
         
         })   
       
