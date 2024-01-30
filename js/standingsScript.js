@@ -40,7 +40,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         const teamName = teamData.name
         const teamLogo = teamData.image_path
 
-           console.log(`Team ID: ${teamID}, Position: ${position}, Points: ${points}, Name: ${teamName}, Image Path: ${teamLogo}`)
+
+        const teamContainer = document.createElement('div')
+        const positionElement = document.createElement('p')
+        const pointsElement = document.createElement('p')
+        const teamNameElement = document.createElement('p')
+        const teamLogoElement = document.createElement('img')
+
+        positionElement.textContent = position
+        pointsElement.textContent = points
+        teamNameElement.textContent = teamName
+        teamLogoElement.src = teamLogo
+
+        teamContainer.appendChild(positionElement)
+        teamContainer.appendChild(pointsElement)
+        teamContainer.appendChild(teamNameElement)
+        teamContainer.appendChild(teamLogoElement)
+
+        standingsContainer.appendChild(teamContainer)
+
+        //    console.log(`Team ID: ${teamID}, Position: ${position}, Points: ${points}, Name: ${teamName}, Image Path: ${teamLogo}`)
     } 
     
 })
