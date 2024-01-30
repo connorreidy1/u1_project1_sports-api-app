@@ -15,3 +15,9 @@ https://stackoverflow.com/questions/57547226/how-to-remove-background-from-butto
 
 Displaying sections
 https://stackoverflow.com/questions/69315502/creating-a-script-for-a-button-to-close-other-sections-when-opening-its-own-sect
+
+.map Method for retrieving information from "player_id" in API
+https://stackoverflow.com/questions/72106376/get-data-from-api-by-map-function
+
+
+

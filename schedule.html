@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script defer src="js/teamScript.js"></script>
+    <script defer src="js/scheduleScript.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/teamstyle.css">
+    <link rel="stylesheet" href="css/schedulestyle.css">
     <title>Team Details</title>
 </head>
 <body>
@@ -27,23 +27,21 @@
             <button value="Schedule" id="schedule">Schedule</button>
         </div>
     </div>
-    <div id="team-details-container">
-        <div id="team-header-container">
-            <div id="logo-name-containter">
-                <img id="team-logo">
-                <h2 id="team-name"></h2>
-            </div>
-            <div id="stadium-location-container">
-                <!-- <h4 id="team-record"></h4> -->
-                <h4 id="team-stadium"></h4>
-                <h4 id="team-location"></h4>
-            </div>
-            <div id="roster">
-                <h3>Roster</h3>
-            </div>
+    <section id="schedule-container">
+        <div id="schedule-header-container">
+                <h2 id="todays-fixtures">Today's Fixtures<h2>
         </div>
-        <section id="individual-team-container"></section>
-    </div>
+        <div id="fixture1-container">
+            <h3 id="fixture1-name"></h3>
+            <h4 id="fixure1-start"></h4>
+            <h4 id="venue1-name"></h4>
+        </div>
+        <div id="fixture2-container">
+            <h3 id="fixture2-name"></h3>
+            <h4 id="fixure2-start"></h4>
+            <h4 id="venue2-name"></h4>
+        </div>
+    </section>
     <div id="strip1"></div>
     <div id="strip2"></div>
 </html>
