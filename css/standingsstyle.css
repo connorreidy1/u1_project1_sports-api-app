@@ -1,0 +1,57 @@
+body {
+    font-family: "Red Hat Display", sans-serif;
+    font-weight: 400;
+    background-color: #1c2d5a;
+    overflow: scroll;
+    margin: 0;
+}
+
+#home-container {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+header{
+    background-color: white;
+    padding-top: 10px;
+}
+
+#header-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 25px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+    margin-bottom: 0;
+}
+
+#league-logo {
+   width: 80px;
+   padding-right: 30px;
+}
+
+#standings, #top-scorers, #schedule {
+    border: none;
+    background: none;
+    font-family: "Red Hat Display", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    padding: 15px 0px 15px 0px;
+    cursor: pointer;
+}
+#links-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    background-color: #f9bc16;
+    font-size: 15px;
+    z-index: 0;
+}
