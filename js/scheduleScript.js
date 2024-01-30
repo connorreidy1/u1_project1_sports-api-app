@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const fixture1Time= document.querySelector('#fixture1-time')
     const venue1Name = document.querySelector('#venue1-name')
     const fixture2Name = document.querySelector('#fixture2-name')
-    const fixture2Start= document.querySelector('#fixure2-start')
+    const fixture2Time= document.querySelector('#fixture2-time')
     const venue2Name = document.querySelector('#venue2-name')
     
     const response = await axios.get(`${baseURL}leagues/${leagueID}?api_token=${apiToken}&include=today`)
@@ -51,5 +51,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     fixture1Date.innerHTML = `${formatDate(fixtureData.today[0].starting_at)}`
     fixture1Time.innerHTML = `${formatTime(fixtureData.today[0].starting_at)}`
     fixture2Name.innerHTML = fixtureData.today[1].name
-    fixture2Start.innerHTML = `${formatDate(fixtureData.today[1].starting_at)} ${formatTime(fixtureData.today[1].starting_at)}`
+    fixture2Time.innerHTML = `${formatTime(fixtureData.today[1].starting_at)}`
 })
