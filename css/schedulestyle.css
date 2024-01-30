@@ -59,7 +59,7 @@ h1 {
 
 h2 {
     font-size: 25px;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 h3 {
@@ -71,64 +71,72 @@ h4{
     font-weight: 400;
 }
 
-#schedule-container {
+#all-schedule-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
     margin: 0 auto;
     padding-top: 140px;
-    background-color: white;
     width: 90%;
     height: 100vh;
-    font-family: "Red Hat Display", sans-serif;
+    background: white;
 }
+
 #schedule-header-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
-
 #header-title {
-    margin-bottom: -15px;
+    margin-bottom: -20px;
 }
 
-#fixtures-container{
+#schedule-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80vw;
-    height: 100vh;
+    border-radius: 10px;
+    width: 30vw;
     background-color: #f9bc16;
+    width: 90%;
+    height: 100vh;
+    font-family: "Red Hat Display", sans-serif;
 }
 
-#fixture1-container, #fixture2-container{
-    display: flex;
+.fixture-container {
+    display:flex;
     flex-direction: column;
     align-items: center;
     width: 75vw;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 15px;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, .5);
     cursor: pointer;
+    
 }
 
-#fixture1-name-container, #fixture2-name-container {
-    margin-bottom: -35px;
-    margin-top: -10px;
+.fixture-name-container {
+    line-height: 5px;
+    margin-bottom: -15px;
+    
 }
 
-#fixture1-time-container, #fixture2-time-container  {
-    margin-bottom: -10px;
+.fixture-details-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    line-height: 5px;
+    width: 75vw;
 }
 
+.venue-name {
+   margin-left: 40px;
+}
 
-
-
-
+.fixture-time {
+    margin-right: 40px
+}
 
 
 

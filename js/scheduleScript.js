@@ -15,19 +15,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener('DOMContentLoaded', async () => {
     const baseURL = 'https://api.sportmonks.com/v3/football/'
     const apiToken = 'OPYT85RqlYZMUrcBDn4xvkSfa8bXHN2ITuEQpH1GLJQNw6D52mkB4joVSvBy'
-    const teamDetailsContainer = document.querySelector('#schedule-container')
+    const scheduleContainer = document.querySelector('#schedule-container')
     const leagueID = '501'
 
     const urlParams = new URLSearchParams(window.location.search)
     const fixtureID= urlParams.get('fixtureID')
 
-    const fixture1Name = document.querySelector('#fixture1-name')
-    const fixture1Date= document.querySelector('#fixture1-date')
-    const fixture1Time= document.querySelector('#fixture1-time')
-    const venue1Name = document.querySelector('#venue1-name')
-    const fixture2Name = document.querySelector('#fixture2-name')
-    const fixture2Time= document.querySelector('#fixture2-time')
-    const venue2Name = document.querySelector('#venue2-name')
     
     const response = await axios.get(`${baseURL}leagues/${leagueID}?api_token=${apiToken}&include=today`)
     const fixtureData = response.data.data
@@ -45,11 +38,53 @@ document.addEventListener('DOMContentLoaded', async () => {
         return time.toLocaleTimeString('en-US', options)
     }
 
+    //get venue name
+
+    const getVenueDetails = async (venueID) => {
+        const venueResponse = await axios.get(`${baseURL}venues/${venueID}?api_token=${apiToken}`)
+        const venueData = venueResponse.data.data
+        return venueData.name
+    }
+
+    const fixtureDate = document.querySelector('#fixture-date')
+    //loop through each fixture for venue
+    for (const fixture of fixtureData.today) {
+        const venueName = await getVenueDetails(fixture.venue_id)
+
+        const fixtureContainerDiv = document.createElement('div')
+        fixtureContainerDiv.classList.add('fixture-container')
+
+        //separate div for fixtureName
+        const fixtureNameDiv = document.createElement('div')
+        fixtureNameDiv.classList.add('fixture-name-container')
+
+        const fixtureName = document.createElement('h3')
+        fixtureName.innerHTML = fixture.name
+
+        //separate div for date, time, and venueName
+        const fixtureDetailsDiv = document.createElement('div')
+        fixtureDetailsDiv.classList.add('fixture-details-container')
+
+        fixtureDate.innerHTML = `${formatDate(fixture.starting_at)}`
+
+        const fixtureTime = document.createElement('h4')
+        fixtureTime.classList.add('fixture-time')
+        fixtureTime.innerHTML = `${formatTime(fixture.starting_at)}`
+
+        const venueNameElement = document.createElement('h4')
+        venueNameElement.classList.add('venue-name')
+        venueNameElement.innerHTML = venueName
+
+        fixtureNameDiv.appendChild(fixtureName)
+
+        fixtureDetailsDiv.appendChild(venueNameElement)
+        fixtureDetailsDiv.appendChild(fixtureTime)
+
+        fixtureContainerDiv.appendChild(fixtureNameDiv)
+        fixtureContainerDiv.appendChild(fixtureDetailsDiv)
+
+        scheduleContainer.appendChild(fixtureContainerDiv)
+    }
+
   
-    //Fixture information
-    fixture1Name.innerHTML = fixtureData.today[0].name
-    fixture1Date.innerHTML = `${formatDate(fixtureData.today[0].starting_at)}`
-    fixture1Time.innerHTML = `${formatTime(fixtureData.today[0].starting_at)}`
-    fixture2Name.innerHTML = fixtureData.today[1].name
-    fixture2Time.innerHTML = `${formatTime(fixtureData.today[1].starting_at)}`
 })
