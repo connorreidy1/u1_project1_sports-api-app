@@ -64,7 +64,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     const jerseyNumber = document.createElement('h3')
                     jerseyNumber.classList.add('jersey-number')
-                    jerseyNumber.innerText = `#${playerData.statistics[0].jersey_number}`
+                    const jerseyNumberValue = playerData.statistics[0].jersey_number
+                    //check if jersey_number is not null and a valid number
+                    if (jerseyNumberValue !== null && !isNaN(jerseyNumberValue)) {
+                        jerseyNumber.innerText = `#${jerseyNumberValue}`
+                    } else {
+                        jerseyNumber.innerText = 'n/a'
+                    }
                 
                     const positionName = document.createElement('h3')
                     positionName.classList.add('position-name')
