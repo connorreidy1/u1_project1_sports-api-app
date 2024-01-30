@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const fixtureID= urlParams.get('fixtureID')
 
     const fixture1Name = document.querySelector('#fixture1-name')
-    const fixture1Start= document.querySelector('#fixure1-start')
+    const fixture1Date= document.querySelector('#fixture1-date')
+    const fixture1Time= document.querySelector('#fixture1-time')
     const venue1Name = document.querySelector('#venue1-name')
     const fixture2Name = document.querySelector('#fixture2-name')
     const fixture2Start= document.querySelector('#fixure2-start')
@@ -31,19 +32,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     const response = await axios.get(`${baseURL}leagues/${leagueID}?api_token=${apiToken}&include=today`)
     const fixtureData = response.data.data
 
-    console.log(fixtureData)
+
+    //Format date and time
+    const formatDate = (dateString) => {
+        const options = {year: 'numeric', month: 'long', day:'numeric'}
+        const date = new Date(dateString)
+        return date.toLocaleDateString('en-US', options)
+    }
+    const formatTime = (timeString) => {
+        const options = {hour: 'numeric', minute: 'numeric', hour12: false}
+        const time = new Date(timeString)
+        return time.toLocaleTimeString('en-US', options)
+    }
+
+  
     //Fixture information
     fixture1Name.innerHTML = fixtureData.today[0].name
-    fixture1Start.innerHTML = fixtureData.today[0].starting_at
+    fixture1Date.innerHTML = `${formatDate(fixtureData.today[0].starting_at)}`
+    fixture1Time.innerHTML = `${formatTime(fixtureData.today[0].starting_at)}`
     fixture2Name.innerHTML = fixtureData.today[1].name
-    fixture2Start.innerHTML = fixtureData.today[1].starting_at
-
-    // teamLogo.src = detailedTeamData.image_path
-    // const name = detailedTeamData.name
-    // teamName.innerHTML = name
-    // const stadium = detailedTeamData.venue.name
-    // teamStadium.innerHTML = stadium
-    // const city = detailedTeamData.venue.city_name
-    // const country = detailedTeamData.country.name
-    // teamLocation.innerHTML = `${city}, ${country}`
+    fixture2Start.innerHTML = `${formatDate(fixtureData.today[1].starting_at)} ${formatTime(fixtureData.today[1].starting_at)}`
 })
