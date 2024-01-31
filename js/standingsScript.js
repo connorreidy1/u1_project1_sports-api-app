@@ -42,10 +42,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
         const teamContainer = document.createElement('div')
+        teamContainer.classList.add('team-container')
         const positionElement = document.createElement('p')
+        positionElement.classList.add('position-container')
         const pointsElement = document.createElement('p')
+        pointsElement.classList.add('points-container')
         const teamNameElement = document.createElement('p')
+        teamNameElement.classList.add('teamName-container')
         const teamLogoElement = document.createElement('img')
+        teamLogoElement.classList.add('teamLogo-container')
 
         positionElement.textContent = position
         pointsElement.textContent = points
@@ -53,9 +58,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         teamLogoElement.src = teamLogo
 
         teamContainer.appendChild(positionElement)
-        teamContainer.appendChild(pointsElement)
-        teamContainer.appendChild(teamNameElement)
         teamContainer.appendChild(teamLogoElement)
+        teamContainer.appendChild(teamNameElement)
+        teamContainer.appendChild(pointsElement)
+        
 
         standingsContainer.appendChild(teamContainer)
 
