@@ -12,20 +12,43 @@ document.addEventListener('DOMContentLoaded', async () => {
     leagueLogo.src = leagueData.image_path
 })
 
+
 document.addEventListener('DOMContentLoaded', async () => {
     const baseURL = 'https://api.sportmonks.com/v3/football/'
     const apiToken = 'OPYT85RqlYZMUrcBDn4xvkSfa8bXHN2ITuEQpH1GLJQNw6D52mkB4joVSvBy'
     const scheduleContainer = document.querySelector('#schedule-container')
-    const leagueID = '501'
+    const dateRange = '2024-01-29/2024-02-04'
 
     const urlParams = new URLSearchParams(window.location.search)
-    const fixtureID= urlParams.get('fixtureID')
 
     
-    const response = await axios.get(`${baseURL}leagues/${leagueID}?api_token=${apiToken}&include=today`)
-    const fixtureData = response.data.data
+    // const response = await axios.get(`${baseURL}fixtures/between/${dateRange}?api_token=${apiToken}&include=participants;venue`)
+    // const fixtureData = response.data.data
 
+    //Define start date
+    const startDate = new Date('2024-01-29')
+    const numberofRanges = 5
 
+    //create date ranges in 7 day increments
+    const dateRanges = Array.from({length: numberofRanges}, (_, index) => {
+        const start = new Date(startDate)
+        start.setDate(startDate.getDate() + index * 7)
+        const end = new Date(start)
+        end.setDate(start.getDate() + 7)
+        return `${start.toISOString().split('T')[0]}/${end.toISOString().split('T')[0]}`
+    })
+
+    //function to get fixtures for a date range
+    const getFixturesForDateRange = async (dateRange) => {
+        const response = await axios.get(`${baseURL}fixtures/between/${dateRange}?api_token=${apiToken}&include=participants;venue`);
+    const fixtureData = response.data.data;
+
+    console.log("Fixture Data:", fixtureData); 
+
+    fixtureData.forEach((fixture) => {
+        renderFixtureDetails(fixture);
+        })
+    }
     //Format date and time
     const formatDate = (dateString) => {
         const options = {year: 'numeric', month: 'long', day:'numeric'}
@@ -38,53 +61,69 @@ document.addEventListener('DOMContentLoaded', async () => {
         return time.toLocaleTimeString('en-US', options)
     }
 
-    //get venue name
+    //Get fixture details
+    function renderFixtureDetails(fixture) {
+        const fixtureName = fixture.name
+        const participant1Img = fixture.participants[0].image_path
+        const participant2Img = fixture.participants[1].image_path
+        const fixtureDate = `${formatDate(fixture.starting_at)}`
+        const fixtureTime = `${formatTime(fixture.starting_at)}`
+        const venueName = fixture.venue.name
+        
+        //FixtureContainer
+        const fixtureContainer = document.createElement('div')
+        fixtureContainer.classList.add('fixture-container')
 
-    const getVenueDetails = async (venueID) => {
-        const venueResponse = await axios.get(`${baseURL}venues/${venueID}?api_token=${apiToken}`)
-        const venueData = venueResponse.data.data
-        return venueData.name
-    }
+        //Participants Container
+        const participantsContainer = document.createElement('div')
+        participantsContainer.classList.add('participants-container')
 
-    const fixtureDate = document.querySelector('#fixture-date')
-    //loop through each fixture for venue
-    for (const fixture of fixtureData.today) {
-        const venueName = await getVenueDetails(fixture.venue_id)
+        const participant1ImgElement = document.createElement('img')
+        participant1ImgElement.classList.add('participant1-logo')
+        participant1ImgElement.src = participant1Img
 
-        const fixtureContainerDiv = document.createElement('div')
-        fixtureContainerDiv.classList.add('fixture-container')
+        const fixtureNameElement = document.createElement('h3')
+        fixtureNameElement.classList.add('fixture-name')
+        fixtureNameElement.textContent = fixtureName
 
-        //separate div for fixtureName
-        const fixtureNameDiv = document.createElement('div')
-        fixtureNameDiv.classList.add('fixture-name-container')
+        const participant2ImgElement = document.createElement('img')
+        participant2ImgElement.classList.add('participant2-logo')
+        participant2ImgElement.src = participant2Img
+        
+        //Details Container
+        const detailsContainer = document.createElement('div')
+        detailsContainer.classList.add('details-container')
 
-        const fixtureName = document.createElement('h3')
-        fixtureName.innerHTML = fixture.name
+        const fixtureDateElement = document.createElement('h4')
+        fixtureDateElement.classList.add('fixture-date')
+        fixtureDateElement.textContent = fixtureDate
 
-        //separate div for date, time, and venueName
-        const fixtureDetailsDiv = document.createElement('div')
-        fixtureDetailsDiv.classList.add('fixture-details-container')
-
-        fixtureDate.innerHTML = `${formatDate(fixture.starting_at)}`
-
-        const fixtureTime = document.createElement('h4')
-        fixtureTime.classList.add('fixture-time')
-        fixtureTime.innerHTML = `${formatTime(fixture.starting_at)}`
+        const fixtureTimeElement = document.createElement('h4')
+        fixtureTimeElement.classList.add('fixture-time')
+        fixtureTimeElement.textContent = fixtureTime
 
         const venueNameElement = document.createElement('h4')
         venueNameElement.classList.add('venue-name')
-        venueNameElement.innerHTML = venueName
+        venueNameElement.textContent = venueName
+       
+        
+        //Append participants
+        participantsContainer.appendChild(participant1ImgElement)
+        participantsContainer.appendChild(fixtureNameElement)
+        participantsContainer.appendChild(participant2ImgElement)
+        //Append details
+        detailsContainer.appendChild(fixtureDateElement)
+        detailsContainer.appendChild(fixtureTimeElement)
+        detailsContainer.appendChild(venueNameElement)
 
-        fixtureNameDiv.appendChild(fixtureName)
+        //Append to fixtureContainer
+        fixtureContainer.appendChild(participantsContainer)
+        fixtureContainer.appendChild(detailsContainer)
 
-        fixtureDetailsDiv.appendChild(venueNameElement)
-        fixtureDetailsDiv.appendChild(fixtureTime)
-
-        fixtureContainerDiv.appendChild(fixtureNameDiv)
-        fixtureContainerDiv.appendChild(fixtureDetailsDiv)
-
-        scheduleContainer.appendChild(fixtureContainerDiv)
+        //Append to scheduleContainer
+        scheduleContainer.appendChild(fixtureContainer)
+        
+    //   console.log(`${fixtureName}, ${participant1Img}, ${participant2Img}, ${fixtureDate}, ${fixtureTime}, ${venueName}`)
     }
-
-  
+    dateRanges.forEach(getFixturesForDateRange)
 })

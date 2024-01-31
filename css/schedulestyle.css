@@ -56,6 +56,10 @@ h1 {
     z-index: 0;
 }
 /* ////////////////////// */
+.participant1-logo, .participant2-logo {
+    width: 40px;
+    height: 40px;
+}
 
 h2 {
     font-size: 25px;
@@ -63,11 +67,11 @@ h2 {
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 600;
 }
 h4{
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
 }
 
@@ -78,7 +82,6 @@ h4{
     margin: 0 auto;
     padding-top: 140px;
     width: 90%;
-    height: 100vh;
     background: white;
 }
 
@@ -96,10 +99,9 @@ h4{
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
-    width: 30vw;
     background-color: #f9bc16;
     width: 90%;
-    height: 100vh;
+  
     font-family: "Red Hat Display", sans-serif;
 }
 
@@ -113,28 +115,23 @@ h4{
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, .5);
     cursor: pointer;
-    
 }
 
-.fixture-name-container {
-    line-height: 5px;
-    margin-bottom: -15px;
-}
-
-.fixture-details-container {
+.participants-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    line-height: 5px;
-    width: 75vw;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: -10px;
 }
 
-.venue-name {
-   margin-left: 50px;
-}
-
-.fixture-time {
-    margin-right: 50px
+.details-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
 }
 
 
