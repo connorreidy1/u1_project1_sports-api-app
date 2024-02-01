@@ -1,9 +1,10 @@
+//Page Header
 document.addEventListener('DOMContentLoaded', async () => {
     const baseURL = 'https://api.sportmonks.com/v3/football/'
     const apiToken = 'OPYT85RqlYZMUrcBDn4xvkSfa8bXHN2ITuEQpH1GLJQNw6D52mkB4joVSvBy'
     const leagueLogo = document.querySelector('#league-logo')
     const teamsContainer = document.querySelector('#teams-container')
-//LANDING PAGE
+
     //League Logo
     const leagueID = '501'
     const responseLeague = await axios.get(`${baseURL}leagues/${leagueID}?api_token=${apiToken}`)
@@ -19,17 +20,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const scheduleContainer = document.querySelector('#schedule-container')
     const dateRange = '2024-01-29/2024-02-04'
 
+    //schedule name in url
     const urlParams = new URLSearchParams(window.location.search)
 
-    
-    // const response = await axios.get(`${baseURL}fixtures/between/${dateRange}?api_token=${apiToken}&include=participants;venue`)
-    // const fixtureData = response.data.data
-
     //Define start date
-    const startDate = new Date('2024-01-29')
-    const numberofRanges = 5
-
     //create date ranges in 7 day increments
+    const startDate = new Date('2024-02-01')
+    const numberofRanges = 5
+    
     const dateRanges = Array.from({length: numberofRanges}, (_, index) => {
         const start = new Date(startDate)
         start.setDate(startDate.getDate() + index * 7)
@@ -41,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     //function to get fixtures for a date range
     const getFixturesForDateRange = async (dateRange) => {
         const response = await axios.get(`${baseURL}fixtures/between/${dateRange}?api_token=${apiToken}&include=participants;venue`);
-    const fixtureData = response.data.data;
+        const fixtureData = response.data.data;
 
     console.log("Fixture Data:", fixtureData); 
 
@@ -49,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         renderFixtureDetails(fixture);
         })
     }
-    //Format date and time
+    //Reformat date and time
     const formatDate = (dateString) => {
         const options = {year: 'numeric', month: 'long', day:'numeric'}
         const date = new Date(dateString)
@@ -123,7 +121,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         //Append to scheduleContainer
         scheduleContainer.appendChild(fixtureContainer)
         
-    //   console.log(`${fixtureName}, ${participant1Img}, ${participant2Img}, ${fixtureDate}, ${fixtureTime}, ${venueName}`)
+        //console.log(`${fixtureName}, ${participant1Img}, ${participant2Img}, ${fixtureDate}, ${fixtureTime}, ${venueName}`)
     }
     dateRanges.forEach(getFixturesForDateRange)
 })
