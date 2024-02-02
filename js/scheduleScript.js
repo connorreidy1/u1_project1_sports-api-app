@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     leagueLogo.src = leagueData.image_path
 })
 
-
+//Retrieve schedule information
 document.addEventListener('DOMContentLoaded', async () => {
     const baseURL = 'https://api.sportmonks.com/v3/football/'
     const apiToken = 'OPYT85RqlYZMUrcBDn4xvkSfa8bXHN2ITuEQpH1GLJQNw6D52mkB4joVSvBy'

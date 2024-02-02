@@ -2,6 +2,7 @@
 Unit 1 Project 1 Sports API App
 
 *** Best viewed the iPhone 14 Pro Max in the device toolbar of Inspect in your browser ***
+*** CSS not ideal for normal web page viewing ***
 
 
 Hex codes
@@ -11,6 +12,9 @@ Gray Blue: #505e7e rgba(80,94,126,255)
 
 
 Resources
+
+API
+my.sportmonks.com
 
 Button CSS Help
 https://stackoverflow.com/questions/57547226/how-to-remove-background-from-button
